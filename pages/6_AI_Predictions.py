@@ -4,9 +4,7 @@ import joblib
 
 st.title("🤖 AI Predictions")
 
-model = joblib.load(
-    "models/no_show_model.pkl"
-)
+
 
 age = st.slider(
     "Patient Age",
