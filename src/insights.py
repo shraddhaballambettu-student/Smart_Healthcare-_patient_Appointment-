@@ -1,8 +1,8 @@
-def generate_insights(df):
+def generate_business_insights(df):
 
-    insights=[]
+    insights = []
 
-    highest_revenue_dept = (
+    highest_revenue = (
         df.groupby("department")
         ["total_bill"]
         .sum()
@@ -10,23 +10,26 @@ def generate_insights(df):
     )
 
     insights.append(
-        f"Highest revenue department is {highest_revenue_dept}"
+        f"Highest Revenue Department: {highest_revenue}"
     )
 
-    avg_wait = df[
-        "waiting_time_minutes"
-    ].mean()
-
-    insights.append(
-        f"Average waiting time is {avg_wait:.2f} minutes"
+    avg_wait = (
+        df["waiting_time_minutes"]
+        .mean()
     )
 
-    satisfaction = df[
-        "patient_satisfaction_score"
-    ].mean()
+    insights.append(
+        f"Average Waiting Time: {avg_wait:.2f} mins"
+    )
+
+    no_show_rate = (
+        (df["appointment_status"] == "No Show")
+        .mean()
+        * 100
+    )
 
     insights.append(
-        f"Patient satisfaction score is {satisfaction:.2f}"
+        f"No Show Rate: {no_show_rate:.2f}%"
     )
 
     return insights
